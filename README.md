@@ -1,4 +1,5 @@
-Descart is a directory website created by Eddie Kim. There seems to be no website that displays all the food carts in a user friendly manner so this website is in development to create one such helpful app. It will eventually include helpful features:
+## Descart
+Descart is a directory website created by Eddie Kim. There seems to be no website that displays all the food carts in a user friendly manner so this website is in development to create one such helpful app. It will eventually include the following features:
 - Listing all the food carts in a certain food cart pod
 - Sorting by food type
 - Sorting by location
