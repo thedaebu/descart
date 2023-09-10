@@ -1,0 +1,3 @@
+psycopg2 cannot be installed using pipenv - find workaround
+
+pipenv run python run.py
