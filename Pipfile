@@ -4,11 +4,10 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "~=1.1"
-flask-migrate = "==2.5.2"
-flask-sqlalchemy = "==2.4.1"
-markupsafe = "==2.0.1"
-psycopg2 = "==2.8.4"
+flask = "*"
+flask-migrate = "*"
+flask-sqlalchemy = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 pylint = "*"
