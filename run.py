@@ -1,12 +1,9 @@
 # modules found in __init__.py file can be imported
-from api import create_app
+from api import create_app, db
+from flask_migrate import Migrate
 
 app = create_app()
-
-
-@app.route("/api/python")
-def hello():
-    return "Hello World"
+migrate = Migrate(app, db)
 
 
 # can be used when running file using python command
