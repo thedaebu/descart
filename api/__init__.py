@@ -1,8 +1,8 @@
 from flask import Flask
-# from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from api.config import Config
 
-# db = SQLAlchemy()
+db = SQLAlchemy()
 
 
 def create_app(config=Config):
@@ -10,8 +10,11 @@ def create_app(config=Config):
     app = Flask(__name__)
     # configure database for flask app
     app.config.from_object(Config)
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    # db.init_app(app)
+    db.init_app(app)
+
+    from api.carts.routes import carts
+    app.register_blueprint(carts)
 
     return app
