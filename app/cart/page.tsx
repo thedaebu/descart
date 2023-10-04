@@ -1,7 +1,20 @@
-function Page() {
+'use client'
+import { useEffect, useState } from "react";
+
+function CartPage() {
+    const [mounted, setMounted] = useState<boolean>(true);
+
+    // useEffect(() => {
+    //     setMounted(true);
+    // }, []);
+
     return (
-        <p>This is a cart page</p>
+        <>
+            <div>
+                <p>cart page</p>
+            </div>
+        </>
     );
 }
 
-export default Page;
+export default CartPage;

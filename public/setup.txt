@@ -1,0 +1,10 @@
+pipenv run python run.py
+
+flask db init - maybe
+flask db migrate
+flask db upgrade
+
+psql
+\c descart_dev
+\dt
+\d <table_name>

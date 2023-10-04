@@ -1,0 +1,4 @@
+- had trouble running flask server because of soft_unicode didn't exist in
+markupsafe package installed with flask so had to downgrade markupsafe(had to 
+reinstall packages but not unicode bug doesn't show up)
+- psycopg2 is not compatible with pipenv so install psycopg2-binary
