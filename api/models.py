@@ -29,6 +29,6 @@ class Cart(db.Model):
             'phoneNumber': self.phoneNumber,
             'state': self.state,
             'status': self.status,
-            'webside': self.webside,
+            'website': self.website,
             'zipCode': self.zipCode
         }
