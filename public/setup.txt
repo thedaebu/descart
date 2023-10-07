@@ -1,5 +1,6 @@
 pipenv run python run.py
 
+export FLASK_APP=run.py
 flask db init - maybe
 flask db migrate
 flask db upgrade
