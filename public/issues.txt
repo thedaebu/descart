@@ -2,6 +2,7 @@
 markupsafe package installed with flask so had to downgrade markupsafe(had to 
 reinstall packages but not unicode bug doesn't show up)
 - psycopg2 is not compatible with pipenv so install psycopg2-binary
+- changed nextjs version from 13.4.19 to 13.4.4 because useEffect stopped working
 
 model
 - restaurant
