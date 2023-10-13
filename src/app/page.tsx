@@ -1,17 +1,17 @@
 'use client'
-import { fetchCarts } from "@/util/api/cart_api_util";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import * as cartActions from "../actions/cart_actions";
 import { useEffect, useState } from "react";
 
 function Page() {
-    const [carts, setCarts] = useState<Object>({});
+    const carts: {} = useSelector((state: any) => state.entities.carts);
+
+    const dispatch = useDispatch();
+    const fetchCarts = () => dispatch(cartActions.fetchCarts());
 
     useEffect(() => {
-        // fetch('http://localhost:8080/api/carts')
-        //     .then(res => res.json())
-        //     .then(data => setCarts(() => data));
-        fetchCarts()
-            .then(res => setCarts(() => res.data))
+        fetchCarts();
     }, []);
 
     return (
