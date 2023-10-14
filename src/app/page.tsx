@@ -1,11 +1,12 @@
 'use client'
-import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
-import * as cartActions from "../actions/cart_actions";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Link from "next/link";
+import * as cartActions from "../actions/cart_actions";
+import { Cart } from "@/my_types";
 
 function Page() {
-    const carts: {} = useSelector((state: any) => state.entities.carts);
+    const carts: { [key: number]: Cart; } = useSelector((state: any) => state.entities.carts);
 
     const dispatch = useDispatch();
     const fetchCarts = () => dispatch(cartActions.fetchCarts());
