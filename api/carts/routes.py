@@ -11,10 +11,12 @@ carts = Blueprint('carts', __name__)
 #     print("This is executed BEFORE each request.")
 
 
-@carts.route('/api/carts/index', methods=['GET'])
+@carts.route('/api/carts/index', methods=['GET', 'POST'])
 def cart_index():
-    # allCarts = Cart.query.all()
-    carts = {cart.id: cart.serialize() for cart in Cart.query.all()}
+    # carts = {cart.id: cart.serialize() for cart in Cart.query.all()}
+    search = eval(request.data.decode('utf-8'))['search']
+    carts = {cart.id: cart.serialize() for cart in Cart.query.where(Cart.city
+                                                                    == search)}
     return jsonify({'carts': carts})
 
 
