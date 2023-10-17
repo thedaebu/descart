@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import * as cartActions from "../actions/cart_actions";
 import { Cart } from "@/my_types";
+import Header from "./header";
+import CartColumn from "./cart-column";
+import MenuColumn from "./menu-column";
+import SearchColumn from "./search-column";
 
 function Page() {
     const carts: { [key: number]: Cart; } = useSelector((state: any) => state.entities.carts);
@@ -17,12 +21,12 @@ function Page() {
 
     return (
         <>
-            <h1>Hello, Next.js!s</h1>
-            {Object.keys(carts).length > 0 && (
-                <>
-                    {Object.values(carts)[0].address}
-                </>
-            )}
+            {<Header />}
+            <section className='columns'>
+                <MenuColumn />
+                <SearchColumn />
+                <CartColumn carts={carts} />
+            </section>
         </>
     );
 }
