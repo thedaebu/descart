@@ -5,9 +5,9 @@ import Link from "next/link";
 import * as cartActions from "../actions/cart_actions";
 import { Cart } from "@/my_types";
 import Header from "./header";
-import CartColumn from "./cart-column";
-import MenuColumn from "./menu-column";
+import CartShowColumn from "./cart-show-column";
 import SearchColumn from "./search-column";
+import CartListColumn from "./cart-list-column";
 
 function Page() {
     const carts: { [key: number]: Cart; } = useSelector((state: any) => state.entities.carts);
@@ -23,9 +23,9 @@ function Page() {
         <>
             {<Header />}
             <section className='columns'>
-                <MenuColumn />
                 <SearchColumn />
-                <CartColumn carts={carts} />
+                <CartListColumn />
+                <CartShowColumn carts={carts} />
             </section>
         </>
     );
