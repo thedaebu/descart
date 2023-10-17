@@ -9,3 +9,11 @@ psql
 \c descart_dev
 \dt
 \d <table_name>
+
+white:
+rgb(243, 242, 218)
+green:
+rgb(78, 141, 124)
+rgb(4, 87, 98)
+pink:
+rgb(234, 151, 173)
