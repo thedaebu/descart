@@ -12,18 +12,24 @@ import CartListColumn from "./cart-list-column";
 function Page() {
     const carts: { [key: number]: Cart; } = useSelector((state: any) => state.entities.carts);
 
+    const [searchParams, setSearchParams] = useState<string>("");
+
     const dispatch = useDispatch();
-    const fetchCarts = () => dispatch(cartActions.fetchCarts());
+    const fetchCarts = (search: string) => dispatch(cartActions.fetchCarts(search));
 
     useEffect(() => {
-        fetchCarts();
+        fetchCarts("Portland");
     }, []);
+
+    function handleSearchParams(string: string) {
+        setSearchParams(() => string);
+    }
 
     return (
         <>
             {<Header />}
             <section className='columns'>
-                <SearchColumn />
+                <SearchColumn handleSearchParams={handleSearchParams} />
                 <CartListColumn />
                 <CartShowColumn carts={carts} />
             </section>
