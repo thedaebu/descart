@@ -1,0 +1,15 @@
+.columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    width: 60vw;
+    margin: 0 20vw;
+    .search-column {
+        background: rgb(130, 130, 239);
+    }
+    .cart-list-column {
+        background: rgb(252, 252, 179);
+    }
+    .cart-show-column {
+        background: rgb(255, 139, 139);
+    }
+}
