@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from api import db
 from api.models import Cart
 from api.carts.seeds import cartSeeds
+from sqlalchemy import func
 
 carts = Blueprint('carts', __name__)
 
@@ -13,10 +14,9 @@ carts = Blueprint('carts', __name__)
 
 @carts.route('/api/carts/index', methods=['GET', 'POST'])
 def cart_index():
-    # carts = {cart.id: cart.serialize() for cart in Cart.query.all()}
-    search = eval(request.data.decode('utf-8'))['search']
-    carts = {cart.id: cart.serialize() for cart in Cart.query.where(Cart.city
-                                                                    == search)}
+    search = '%' + eval(request.data.decode('utf-8'))['search'] + '%'
+    carts = {cart.id: cart.serialize() for cart in
+             Cart.query.filter(func.lower(Cart.city).like(search)).all()}
     return jsonify({'carts': carts})
 
 
