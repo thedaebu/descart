@@ -2,11 +2,12 @@ import { Cart } from "@/my_types";
 
 type Props = {
     cart: Cart;
+    currentCart: number;
     handleCurrentCart: Function;
 };
 
 function CartListItem(props: Props) {
-    const { cart, handleCurrentCart } = props;
+    const { cart, currentCart, handleCurrentCart } = props;
     const { address, areaCode, city, id, name, phoneNumber, state, status, website, zipCode } = cart;
     
     function addressDisplay() {
@@ -24,7 +25,7 @@ function CartListItem(props: Props) {
 
     return (
         <li
-            className='cart-list-item'
+            className={currentCart === id ? 'cart-list-item--highlighted' : 'cart-list-item'}
             onClick={() => handleCurrentCart(id)}
         >
             <h2>{name}</h2>
