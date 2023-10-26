@@ -1,6 +1,8 @@
 from flask import Blueprint, jsonify, request
 from api import db
 from api.models import Cart
+from api.carts.seeds import cartSeeds
+from sqlalchemy import func
 
 carts = Blueprint('carts', __name__)
 
@@ -10,14 +12,11 @@ carts = Blueprint('carts', __name__)
 #     print("This is executed BEFORE each request.")
 
 
-@carts.route('/api/carts', methods=['GET'])
+@carts.route('/api/carts/index', methods=['GET', 'POST'])
 def cart_index():
-    # cart1 = Cart(address='1080 SE Madison St', areaCode='503', city='Portland', name='Pelmeni Pelmeni', phoneNumber='9084570', state='OR', status=True, website='', zipCode='97214')
-    # cart2 = Cart(address='1080 SE Madison St', areaCode='503', city='Portland', name='Dae Bap', phoneNumber='9084571', state='OR', status=True, website='', zipCode='97214')
-    # db.session.add(cart1)
-    # db.session.add(cart2)
-    # db.session.commit()
-    carts = {cart.id: cart.serialize() for cart in Cart.query.all()}
+    search = '%' + eval(request.data.decode('utf-8'))['search'] + '%'
+    carts = {cart.id: cart.serialize() for cart in
+             Cart.query.filter(func.lower(Cart.city).like(search)).all()}
     return jsonify({'carts': carts})
 
 
@@ -25,3 +24,18 @@ def cart_index():
 def cart_show(cart_id):
     cart = Cart.query.get_or_404(cart_id)
     return jsonify(cart.serialize())
+
+
+@carts.route('/api/carts/reset', methods=['GET', 'POST'])
+def cart_reset():
+    allCarts = Cart.query.all()
+    if len(allCarts) > 0:
+        db.session.query(Cart).delete()
+        db.session.commit()
+
+    for cartSeed in cartSeeds:
+        db.session.add(cartSeed)
+    db.session.commit()
+
+    carts = {cart.id: cart.serialize() for cart in Cart.query.all()}
+    return jsonify({'carts': carts})

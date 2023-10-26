@@ -27,4 +27,14 @@ model
 - pod
 - type
     - name
+    - have different types
+        - restaurant name
+        - location
+        - pod name
+        - cuisine
 
+search
+- have different sections in search results
+- individual restaurants
+- location
+- pod
