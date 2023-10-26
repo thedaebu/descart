@@ -6,14 +6,11 @@ import CartShowColumn from "./cart-show-column";
 import SearchColumn from "./search-column";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 
 function Columns() {
     const carts: { [key: number]: Cart; } = useSelector((state: any) => state.entities.carts);
 
     const [currentCart, setCurrentCart] = useState<number>(-1);
-
-    const dispatch = useDispatch();
 
     function handleCurrentCart(id: number) {
         setCurrentCart(id);
@@ -24,6 +21,7 @@ function Columns() {
             <SearchColumn />
             <CartListColumn
                 carts={carts}
+                currentCart={currentCart}
                 handleCurrentCart={handleCurrentCart}
             />
             <CartShowColumn currentCart={currentCart} />
