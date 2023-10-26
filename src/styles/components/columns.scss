@@ -1,15 +1,71 @@
+@import '../fonts.scss';
+
 .columns {
     display: grid;
     grid-template-columns: 1fr 1fr 2fr;
     width: 60vw;
+    height: 91vh;
     margin: 0 20vw;
+    border: 2px solid rgb(78, 141, 124);
+    border-radius: 2px;
     .search-column {
-        background: rgb(130, 130, 239);
+        display: flex;
+        justify-content: center;
+        .search-column__input {
+            width: 14vw;
+            height: 20px;
+            margin: 2px 2px 0 2px;
+        }
     }
     .cart-list-column {
-        background: rgb(252, 252, 179);
+        border-left: 2px solid rgb(78, 141, 124);
+        font-family: $gantari;
+        .cart-list-column__header {
+            background: rgb(4, 87, 98);
+        }
+        .cart-list-item {
+            padding: 2px 2px 4px;
+            border-bottom: 2px solid rgb(78, 141, 124);
+            font-family: $gantari;
+            font-weight: 300;
+            cursor: pointer;
+            background-color: transparent;
+            position: relative;
+            overflow: hidden;
+            &::before {
+                content: "";
+                background: linear-gradient(to right, rgb(243, 242, 218), rgb(234, 151, 173), rgb(243, 242, 218));
+                position: absolute;
+                inset: 0;
+                width: 200%;
+                z-index: -1;
+                transition: left 500ms;
+            }
+            &:hover::before {
+                left: -100%;
+            }
+        }
+        .cart-list-item--highlighted {
+            padding: 2px 2px 4px;
+            border-bottom: 2px solid rgb(78, 141, 124);
+            font-family: $gantari;
+            font-weight: 300;
+            cursor: pointer;
+            background-color: transparent;
+            position: relative;
+            overflow: hidden;
+            &::before {
+                content: "";
+                background: linear-gradient(to right, rgb(234, 151, 173), rgb(243, 242, 218));
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                z-index: -1;
+            }
+        }
     }
     .cart-show-column {
-        background: rgb(255, 139, 139);
+        border-left: 2px solid rgb(78, 141, 124);
+        // background: rgb(255, 139, 139);
     }
 }
