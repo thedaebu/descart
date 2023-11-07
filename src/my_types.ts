@@ -1,12 +1,13 @@
 export type Cart = {
     address: string;
-    areaCode: string;
+    area_code: string;
     city: string;
-    id: number
+    id: number;
+    instagram: string;
     name: string;
-    phoneNumber: string;
+    phone_number: string;
     state: string;
     status: string;
     website: string;
-    zipCode: string;
+    zip_code: string;
 };

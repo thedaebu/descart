@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Cart } from "@/my_types";
 
 type Props = {
@@ -8,19 +9,19 @@ type Props = {
 
 function CartListItem(props: Props) {
     const { cart, currentCart, handleCurrentCart } = props;
-    const { address, areaCode, city, id, name, phoneNumber, state, status, website, zipCode } = cart;
-    
+    const { address, area_code, city, id, instagram, name, phone_number, state, status, website, zip_code } = cart;
+
     function addressDisplay() {
         return (
             <section>
                 <p>{address}</p>
-                <p>{`${city}, ${state} ${zipCode}`}</p>
+                <p>{`${city}, ${state} ${zip_code}`}</p>
             </section>
         );
     }
 
     function phoneDisplay() {
-        return `(${areaCode}) ${phoneNumber.slice(0,3)}-${phoneNumber.slice(3)}`;
+        return `(${area_code}) ${phone_number.slice(0,3)}-${phone_number.slice(3)}`;
     }
 
     return (
