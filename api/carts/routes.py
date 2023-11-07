@@ -12,6 +12,12 @@ carts = Blueprint('carts', __name__)
 #     print("This is executed BEFORE each request.")
 
 
+@carts.route('/api/carts/all', methods=['GET'])
+def cart_all():
+    carts = {cart.id: cart.serialize() for cart in Cart.query.all()}
+    return jsonify({'carts': carts})
+
+
 @carts.route('/api/carts/index', methods=['GET', 'POST'])
 def cart_index():
     search = '%' + eval(request.data.decode('utf-8'))['search'] + '%'
