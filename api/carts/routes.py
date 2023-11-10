@@ -45,3 +45,13 @@ def cart_reset():
 
     carts = {cart.id: cart.serialize() for cart in Cart.query.all()}
     return jsonify({'carts': carts})
+
+
+@carts.route('/api/carts/delete', methods=['GET', 'POST'])
+def cart_delete():
+    allCarts = Cart.query.all()
+    if len(allCarts) > 0:
+        db.session.query(Cart).delete()
+        db.session.commit()
+
+    return jsonify({'message': 'All carts deleted'})

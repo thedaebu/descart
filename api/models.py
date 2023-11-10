@@ -9,6 +9,7 @@ class Cart(db.Model):
     address = db.Column(db.String(50), nullable=False)
     area_code = db.Column(db.String(3), nullable=False)
     city = db.Column(db.String(50), nullable=False)
+    google_id = db.Column(db.String(50), nullable=False)
     instagram = db.Column(db.String(100), nullable=False)
     name = db.Column(db.String(50), nullable=False)
     phone_number = db.Column(db.String(7), nullable=False)
@@ -26,6 +27,7 @@ class Cart(db.Model):
             'address': self.address,
             'area_code': self.area_code,
             'city': self.city,
+            'google_id': self.google_id,
             'instagram': self.instagram,
             'name': self.name,
             'phone_number': self.phone_number,
