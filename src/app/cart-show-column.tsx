@@ -1,11 +1,19 @@
 import { Cart } from "@/my_types";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 function CartShowColumn({ currentCart }: { currentCart: number; }) {
     const cart = useSelector((state: any) => state.entities.carts[currentCart]);
     useEffect(() => {
-
+        if (cart && cart.google_id) {
+            axios({
+                method: "GET",
+                url: `https://places.googleapis.com/v1/places/${cart.google_id}?fields=id,displayName,curbside_pickup&key=AIzaSyBDK9J3nvSm2qCebFABANJBFs6CIw4k1k0`,
+            })
+                .then(data => console.log(data))
+                .catch(data => console.log(data))
+        }
     }, [cart]);
 
     function cartDisplay() {
