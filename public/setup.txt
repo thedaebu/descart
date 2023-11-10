@@ -2,6 +2,10 @@ pipenv run python run.py
 
 export FLASK_APP=run.py
 flask db init - maybe
+
+export FLASK_APP=run.py
+** delete migrations folder **
+flask db init
 flask db migrate
 flask db upgrade
 
@@ -9,6 +13,7 @@ psql
 \c descart_dev
 \dt
 \d <table_name>
+DELETE FROM Cart;
 
 white:
 rgb(243, 242, 218)
