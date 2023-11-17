@@ -20,7 +20,8 @@ def cart_all():
 
 @carts.route('/api/carts/index', methods=['GET', 'POST'])
 def cart_index():
-    search = '%' + eval(request.data.decode('utf-8'))['search'] + '%'
+    search = func.lower('%' + eval(request.data.decode('utf-8'))['search'] +
+                        '%')
     carts = {cart.id: cart.serialize() for cart in
              Cart.query.filter(func.lower(Cart.city).like(search)).all()}
     return jsonify({'carts': carts})
