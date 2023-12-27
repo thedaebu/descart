@@ -3,9 +3,8 @@
 .columns {
     display: grid;
     grid-template-columns: 1fr 1fr 2fr;
-    width: 60vw;
+    width: max(550px, 60vw);
     height: 91vh;
-    margin: 0 20vw;
     border: 2px solid rgb(78, 141, 124);
     border-radius: 2px;
     .search-column {
@@ -65,6 +64,7 @@
         }
     }
     .cart-show-column {
+        // min-width: 230px;
         border-left: 2px solid rgb(78, 141, 124);
         // background: rgb(255, 139, 139);
     }
