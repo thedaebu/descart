@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Cart } from "@/my_types";
 
 type Props = {
@@ -21,7 +20,11 @@ function CartListItem(props: Props) {
     }
 
     function phoneDisplay() {
-        return `(${area_code}) ${phone_number.slice(0,3)}-${phone_number.slice(3)}`;
+        return (
+            <p>
+                {`(${area_code}) ${phone_number.slice(0,3)}-${phone_number.slice(3)}`}
+            </p>
+        );
     }
 
     return (
@@ -31,7 +34,7 @@ function CartListItem(props: Props) {
         >
             <h2>{name}</h2>
             {addressDisplay()}
-            <p>{phoneDisplay()}</p>
+            {area_code && phoneDisplay()}
             {website && <p>{website}</p>}
         </li>
     );
