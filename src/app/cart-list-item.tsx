@@ -8,19 +8,23 @@ type Props = {
 
 function CartListItem(props: Props) {
     const { cart, currentCart, handleCurrentCart } = props;
-    const { address, areaCode, city, id, name, phoneNumber, state, status, website, zipCode } = cart;
-    
+    const { address, area_code, city, id, instagram, name, phone_number, state, status, website, zip_code } = cart;
+
     function addressDisplay() {
         return (
             <section>
                 <p>{address}</p>
-                <p>{`${city}, ${state} ${zipCode}`}</p>
+                <p>{`${city}, ${state} ${zip_code}`}</p>
             </section>
         );
     }
 
     function phoneDisplay() {
-        return `(${areaCode}) ${phoneNumber.slice(0,3)}-${phoneNumber.slice(3)}`;
+        return (
+            <p>
+                {`(${area_code}) ${phone_number.slice(0,3)}-${phone_number.slice(3)}`}
+            </p>
+        );
     }
 
     return (
@@ -30,7 +34,7 @@ function CartListItem(props: Props) {
         >
             <h2>{name}</h2>
             {addressDisplay()}
-            <p>{phoneDisplay()}</p>
+            {area_code && phoneDisplay()}
             {website && <p>{website}</p>}
         </li>
     );

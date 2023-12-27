@@ -12,9 +12,16 @@ carts = Blueprint('carts', __name__)
 #     print("This is executed BEFORE each request.")
 
 
+@carts.route('/api/carts/all', methods=['GET'])
+def cart_all():
+    carts = {cart.id: cart.serialize() for cart in Cart.query.all()}
+    return jsonify({'carts': carts})
+
+
 @carts.route('/api/carts/index', methods=['GET', 'POST'])
 def cart_index():
-    search = '%' + eval(request.data.decode('utf-8'))['search'] + '%'
+    search = func.lower('%' + eval(request.data.decode('utf-8'))['search'] +
+                        '%')
     carts = {cart.id: cart.serialize() for cart in
              Cart.query.filter(func.lower(Cart.city).like(search)).all()}
     return jsonify({'carts': carts})
@@ -39,3 +46,13 @@ def cart_reset():
 
     carts = {cart.id: cart.serialize() for cart in Cart.query.all()}
     return jsonify({'carts': carts})
+
+
+@carts.route('/api/carts/delete', methods=['GET', 'POST'])
+def cart_delete():
+    allCarts = Cart.query.all()
+    if len(allCarts) > 0:
+        db.session.query(Cart).delete()
+        db.session.commit()
+
+    return jsonify({'message': 'All carts deleted'})
