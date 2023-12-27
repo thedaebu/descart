@@ -2,6 +2,7 @@ import { Cart } from "@/my_types";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { TbBrandGoogle, TbBrandInstagram, TbWorld } from "react-icons/tb";
 
 type OpeningHours = {
     openNow: boolean;
@@ -26,9 +27,8 @@ function CartShowColumn({ currentCart }: { currentCart: number; }) {
     const [openNow, setOpenNow] = useState<boolean>(false);
     const [rating, setRating] = useState<number>(0);
 
-    // set up opening hours
-
     const cart: Cart = useSelector((state: any) => state.entities.carts[currentCart]);
+
     useEffect(() => {
         if (cart && cart.google_id) {
             axios({
@@ -36,11 +36,54 @@ function CartShowColumn({ currentCart }: { currentCart: number; }) {
                 url: `https://places.googleapis.com/v1/places/${cart.google_id}?fields=currentOpeningHours,rating&key=AIzaSyBDK9J3nvSm2qCebFABANJBFs6CIw4k1k0`,
             })
                 .then(data => {
-                    setCurrentOpeningHours(() => data.data.currentOpeningHours)
+                    setCurrentOpeningHours(() => data.data.currentOpeningHours);
+                    setOpenNow(() => data.data.openNow);
                 })
                 .catch(data => console.log(data))
         }
     }, [cart]);
+
+    function cartDisplay() {
+        const { address, area_code, city, id, instagram, name, phone_number, state, status, website, zip_code } = cart;
+
+        return (
+            <>
+                <h2>{name}</h2>
+                {addressDisplay(address, city, state, zip_code)}
+                <p>{phone_number && phoneDisplay(area_code, phone_number)}</p>
+                {website && (
+                    <a
+                        href={website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <TbWorld />
+                    </a>
+                )}
+                <a
+                    href={`https://www.google.com/search?q=${name} ${city}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                        <TbBrandGoogle />
+                </a>
+                {instagram && (
+                    <a
+                        href={`https://www.instagram.com/${instagram}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                            <TbBrandInstagram />
+                    </a>
+                )}
+                <ul>
+                    {currentOpeningHours && openingHoursDisplay(currentOpeningHours).map((hour: string) => <li>
+                        {hour}
+                    </li>)}
+                </ul>
+            </>
+        );
+    }
 
     function openingHoursDisplay(openingHours: OpeningHours) {
         const days: { [key: number]: string } = {
@@ -59,7 +102,7 @@ function CartShowColumn({ currentCart }: { currentCart: number; }) {
             if (dayHours[i]) {
                 hoursDisplay.push(`${day}: ${dayHours[i]}`);
             } else {
-                hoursDisplay.push(`${day} - CLOSED`);
+                hoursDisplay.push(`${day}: CLOSED`);
             }
         }
 
@@ -90,24 +133,6 @@ function CartShowColumn({ currentCart }: { currentCart: number; }) {
         }
 
         return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')} ${period}`;
-    }
-
-    function cartDisplay() {
-        const { address, area_code, city, id, instagram, name, phone_number, state, status, website, zip_code } = cart;
-
-        return (
-            <>
-                <h2>{name}</h2>
-                {addressDisplay(address, city, state, zip_code)}
-                <p>{phone_number && phoneDisplay(area_code, phone_number)}</p>
-                {website && <p>{website}</p>}
-                <ul>
-                    {currentOpeningHours && openingHoursDisplay(currentOpeningHours).map((hour: string) => <li>
-                        {hour}
-                    </li>)}
-                </ul>
-            </>
-        )
     }
 
     function addressDisplay(address: string, city: string, state: string, zip_code: string) {
