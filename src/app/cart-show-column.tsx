@@ -2,7 +2,7 @@ import { Cart } from "@/my_types";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { TbBrandGoogle, TbBrandInstagram, TbWorld } from "react-icons/tb";
+import { TbBrandGoogle, TbBrandInstagram, TbStarFilled, TbWorld } from "react-icons/tb";
 
 type OpeningHours = {
     openNow: boolean;
@@ -38,6 +38,7 @@ function CartShowColumn({ currentCart }: { currentCart: number; }) {
                 .then(data => {
                     setCurrentOpeningHours(() => data.data.currentOpeningHours);
                     setOpenNow(() => data.data.openNow);
+                    setRating(() => data.data.rating);
                 })
                 .catch(data => console.log(data))
         }
@@ -76,6 +77,12 @@ function CartShowColumn({ currentCart }: { currentCart: number; }) {
                             <TbBrandInstagram />
                     </a>
                 )}
+                <div>
+                    Google rating: {rating} <TbStarFilled />
+                </div>
+                <div>
+                    {isOpenDisplay(openNow)}
+                </div>
                 <ul>
                     {currentOpeningHours && openingHoursDisplay(currentOpeningHours).map((hour: string) => <li>
                         {hour}
@@ -83,6 +90,10 @@ function CartShowColumn({ currentCart }: { currentCart: number; }) {
                 </ul>
             </>
         );
+    }
+    
+    function isOpenDisplay(openStatus: boolean) {
+        return `Currently: ${openStatus ? 'OPEN' : 'CLOSED'}`;
     }
 
     function openingHoursDisplay(openingHours: OpeningHours) {
