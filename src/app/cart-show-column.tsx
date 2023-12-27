@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { TbBrandGoogle, TbBrandInstagram, TbStarFilled, TbWorld } from "react-icons/tb";
+import { GOOGLE_API_KEY } from "../util/api_keys";
 
 type OpeningHours = {
     openNow: boolean;
@@ -33,7 +34,7 @@ function CartShowColumn({ currentCart }: { currentCart: number; }) {
         if (cart && cart.google_id) {
             axios({
                 method: "GET",
-                url: `https://places.googleapis.com/v1/places/${cart.google_id}?fields=currentOpeningHours,rating&key=AIzaSyBDK9J3nvSm2qCebFABANJBFs6CIw4k1k0`,
+                url: `https://places.googleapis.com/v1/places/${cart.google_id}?fields=currentOpeningHours,rating&key=${GOOGLE_API_KEY}`,
             })
                 .then(data => {
                     setCurrentOpeningHours(() => data.data.currentOpeningHours);

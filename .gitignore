@@ -38,3 +38,5 @@ next-env.d.ts
 !/tmp/.keep
 /storage/*
 !/storage/.keep
+
+/src/util/api_keys.ts
